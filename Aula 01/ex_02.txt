@@ -1,0 +1,14 @@
+inteiro a
+inteiro b
+inteiro aux
+
+leia a 
+leia b
+
+se a > b:
+    aux = a
+    a = b
+    b = aux
+
+imprima a
+imprima b

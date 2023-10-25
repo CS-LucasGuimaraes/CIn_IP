@@ -1,0 +1,13 @@
+inteiro x
+inteiro y
+
+leia x
+leia y
+
+se x < y:
+    imprima x
+    imprima y
+
+se não:
+    imprima y
+    imprima x
