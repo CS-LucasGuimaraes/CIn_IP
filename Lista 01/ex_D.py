@@ -1,7 +1,7 @@
-qntd_arthur = int(input("Quantos diamantes Arthur coletou por hora? "))
-qntd_luiz = int(input("Quantos diamantes Luiz coletou por hora? "))
-qntd_pedro = int(input("Quantos diamantes Pedro coletou por hora? "))
-tempo_horas = int(input("Quantas horas durou a competição? "))
+qntd_arthur = int(input(""))
+qntd_luiz = int(input(""))
+qntd_pedro = int(input(""))
+tempo_horas = int(input(""))
 
 # x = (a + b + (|a - b|)) / 2
 
