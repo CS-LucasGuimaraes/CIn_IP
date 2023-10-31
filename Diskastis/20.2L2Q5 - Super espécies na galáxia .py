@@ -4,7 +4,7 @@ count = int()
 
 especie1 = str()
 
-while 1:
+while True:
 
     especie1 = input("")
     if especie1 == "fim":
