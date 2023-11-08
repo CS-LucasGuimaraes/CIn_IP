@@ -7,8 +7,6 @@ habilidade_luta_mascarado = int(input(""))
 poder_surpresa_mascarado = int(input(""))
 defesa_mascarado = int(input(""))
 
-morto = False
-
 if poder_sua_arma > poder_arma_mascarado and sua_habilidade_luta > habilidade_luta_mascarado and seu_poder_surpresa > poder_surpresa_mascarado:
     print("Ainda bem que deu tudo certo, está quase em casa")
 else:
@@ -20,14 +18,13 @@ else:
         poder_sua_arma *= 95/100
     else:
         print("Oh, no! Acabou pra mim")
-        morto = True 
+        exit()
 
-if not morto:
-    poder_arma_novo_mascarado = int(input(""))
-    habilidade_luta_novo_mascarado = int(input(""))
-    poder_surpresa_novo_mascarado = int(input(""))
+poder_arma_novo_mascarado = int(input(""))
+habilidade_luta_novo_mascarado = int(input(""))
+poder_surpresa_novo_mascarado = int(input(""))
 
-    if poder_sua_arma >= poder_arma_novo_mascarado or sua_habilidade_luta >= habilidade_luta_novo_mascarado or seu_poder_surpresa >= poder_surpresa_novo_mascarado:
-        print("Casa, aqui vou eu")
-    else:
-        print("Oh, no! Acabou pra mim")
+if poder_sua_arma >= poder_arma_novo_mascarado or sua_habilidade_luta >= habilidade_luta_novo_mascarado or seu_poder_surpresa >= poder_surpresa_novo_mascarado:
+    print("Casa, aqui vou eu")
+else:
+    print("Oh, no! Acabou pra mim")
