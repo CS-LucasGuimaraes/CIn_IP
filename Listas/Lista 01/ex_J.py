@@ -24,7 +24,7 @@ mac_2 = input("")
 
 # MECANISMO PORTA 2
 
-if cor_2 == "dourada" or cor_2 == "prateada" or (pla_2 == "avenca" and mac_2 == "redonda") or (pla_2 == "espadinha" and mac_2 == "redonda"):
+if (dir_2 == "direita" and (cor_2 == "dourada" or cor_2 == "prateada" or (pla_2 == "avenca" and mac_2 == "redonda") or (pla_2 == "espadinha" and mac_2 == "redonda"))) or (dir_2 == "esquerda" and (cor_2 == "dourada" or cor_2 == "prateada" or (pla_2 == "avenca" and mac_2 == "redonda") or (pla_2 == "espadinha" and mac_2 == "redonda"))):
     pontos += 200
     print("CERTA", end=" ")
 else:
@@ -60,7 +60,7 @@ num_4 = int(input(""))
 
 # MECANISMO PORTA 4
 
-if dir_4 == "direita" and (num_4 % 3 == 0 and num_4 % 2 != 0 and num_4 % 5 != 0):
+if (dir_4 == "direita" and (num_4 % 3 == 0 and num_4 % 2 != 0 and num_4 % 5 != 0) or (dir_4 == "esquerda" and not (num_4 % 3 == 0 and num_4 % 2 != 0 and num_4 % 5 != 0))):
     pontos += 300
     print("CERTA", end=" ")
 else:
