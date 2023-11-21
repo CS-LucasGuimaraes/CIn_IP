@@ -1,6 +1,7 @@
 pont = 0
-
-while(1):
+count = 0
+while(count < 21):
+    count += 1
     string = input("")
     if string == "amei":
         pont += 4
