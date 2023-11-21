@@ -7,7 +7,7 @@ if frase == "Parou filhotada, assim vocês vão deixar todo mundo maluco.":
   if caracteristica == "Uivar" or caracteristica == "Pelos" or caracteristica == "Caninos":
     print("Bem-vindos ao Hotel Transilvânia!")
     print("Wayne, seu cachorrão.")
-    exit()
+    verificador =2 
 
 elif frase == "Veio de novo pelo correio, deixa de ser pão duro.":
   caracteristica = input("")
@@ -15,7 +15,7 @@ elif frase == "Veio de novo pelo correio, deixa de ser pão duro.":
   if caracteristica == "Desmontável" or caracteristica == "Parafusos" or caracteristica == "Morto-vivo":
     print("Bem-vindos ao Hotel Transilvânia!")
     print("Frank, assim vai acabar perdendo a cabeça.")
-    exit()
+    verificador =2 
 
 elif frase == "Quem me beliscou?":
   caracteristica = input("")
@@ -23,7 +23,7 @@ elif frase == "Quem me beliscou?":
   if caracteristica == "Transparente":
     print("Bem-vindos ao Hotel Transilvânia!")
     print("Griffin, prazer em vê-lo.")
-    exit()
+    verificador =2 
 
 elif frase == "Tô na área galera!":
   caracteristica = input("")
@@ -31,7 +31,7 @@ elif frase == "Tô na área galera!":
   if caracteristica == "Enfaixado" or caracteristica == "Morto-vivo":
     print("Bem-vindos ao Hotel Transilvânia!")
     print("Murray, sempre soltando areia.")
-    exit()
+    verificador =2 
 
 if verificador == 0:
   caracteristica = input("")
