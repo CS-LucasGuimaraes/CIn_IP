@@ -1,32 +1,38 @@
-colection = input().strip(", ")
-editions = int(input())
+books = input()
+n = int(input())
 
-book_count = 0
-missing = 0
+total_books = ['O Ladrão de Raios', 'O Mar de Monstros', 'A Maldição do Titã', 'A Batalha do Labirinto', 'O Último Olimpiano']
 
-list = ["O Ladrão de Raios","O Mar de Monstros","A Maldição do Titã","A Batalha do Labirinto","O Último Olimpiano"]
-missing_books = []
+if n == 0:
+  print ('Caramba, você não tem nenhum livro. Compre todos imediatamente.')
 
-for book in colection:
-    if book in list:
-    
-        book_count += 1
-
-for book in list:
-    if book not in colection:
-        missing += 1
-        missing_books.append(book)
-
-if book_count == 5:
-    print("Sua coleção está completa! Você pode ler à vontade.")
-elif book_count == 0:
-    print("Caramba, você não tem nenhum livro. Compre todos imediatamente.")
-else:
-    print("Infelizmente, sua coleção está incompleta. Falta(row) esse(s) livro(s): .",end="")
-    for book in range(len(missing_books)):
-        if book != len(missing_books):
-            print(missing_books[book],end=", ")
-        else:
-            print(missing_books[book])
-
-# if editions > book_count:
+else:  
+  list = books.split(', ')
+ 
+  same = []
+  other = []
+  missing = []
+ 
+  for book in list:
+    if book in total_books:
+      same.append(book)
+    else:
+      other.append(book)
+ 
+  for book in total_books:
+    if book not in list:
+      missing.append(book)
+ 
+  if len(same) == len(total_books):
+    print('Sua coleção está completa! Você pode ler à vontade.')
+   
+  elif len(same) == 0:
+    print ('Caramba, você não tem nenhum livro. Compre todos imediatamente.')
+ 
+  elif len(same) > 0 and len(same) < len(total_books):
+    l = ', '.join(missing)
+    print(f'Infelizmente, sua coleção está incompleta. Falta(m) esse(s) livro(s): {l}.')
+ 
+  if len(other) > 0:
+    j = ', '.join(other)
+    print(f'Cuidado, Sérgio! Você está organizando seus livros de uma forma errada, o(s) livro(s): {j}, não faz(em) parte da saga "Percy Jackson e os Olimpianos".')
