@@ -1,14 +1,14 @@
 nome = input()
 
 while nome != "vou dormir":
-    pp = input()
-    pt = input()
+    palavra_pretendente = input()
+    palavra_taylor = input()
 
     impossible = False
-    for char in pt:
+    for char in palavra_taylor:
         if impossible == False:
-            if char in pp:
-                pp = pp.replace(char, "", 1)
+            if char in palavra_pretendente:
+                palavra_pretendente = palavra_pretendente.replace(char, "", 1)
             else:
                 impossible = True
     if impossible:

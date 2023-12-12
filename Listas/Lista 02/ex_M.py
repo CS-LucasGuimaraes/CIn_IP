@@ -15,12 +15,10 @@ for c in range(comp):
     if nome != "laura" and nome != "carlos" and nome != "roberto":
         cont += 1
 
-exit = False
-
 if cont == 0:
     print("Ah não! João não conseguiu nenhum amigo que o ajudasse. Agora ele vai ter que contar com a sorte para pegar um bom lugar na fila, usando apenas seu computador.")
-    exit = True
-if exit == False:
+
+else:
     print(f"Bom começo! Consegui {cont} amigos que podem me ajudar a comprar o ingresso")
 
     for c in range(cont):

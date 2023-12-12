@@ -1,22 +1,20 @@
-columna = 0
-
-linea = input()
-numero_linea = 0
+row = input()
+row_n = 0
 
 flag = False
 
-while linea != "Fim do labirinto":
-    linea = linea.split(" ")
-    numero_linea += 1
-    for i in range(len(linea)):
-        elemento = linea[i]
-        if elemento == "1" and flag:
+while row != "Fim do labirinto":
+    row = row.split(" ")
+    for i in range(len(row)):
+        elemento = row[i]
+        if elemento == "1" and flag == False:
             print("Relíquias encontradas nos seguintes locais:")
-            print(f"linha: {numero_linea}, coluna: {i} ")
+            print(f"linha: {row_n}, coluna: {i}")
             flag = True
         elif elemento == "1":
-            print(f"linha: {numero_linea}, coluna: {i} ")
-    linea = input()
+            print(f"linha: {row_n}, coluna: {i}")
+    row_n += 1
+    row = input()
 
 if flag == False:
     print("Nenhuma relíquia encontrada no labirinto.")
