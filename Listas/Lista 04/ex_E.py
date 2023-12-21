@@ -1,6 +1,7 @@
 INF = 999
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 vowels = 'aeiou'
+ascci_A = 97
 
 def pangram(string):
     for i in alphabet:
@@ -25,13 +26,29 @@ def hasVowel(string):
             return True
     return False 
 
-# def challengeX():
-#     string = input()
+def countLetter(string):
+    lettermap = [0 for _ in range(26)]
+    for c in string:
+        if (c == ' '): continue
+        lettermap[ord(c.lower())-ascci_A] += 1
+    return lettermap
 
-#     if pangram(string):
+def minmap(lettermap):
+    lettermap.sort()
+    a = 0
+    while lettermap[a] == 0:
+        a += 1
+    return lettermap[a]
 
+def challengeX():
+    string = input()
 
-#     return 1
+    if pangram(string):
+        x = max(countLetter(string))
+    else:
+        x = minmap(countLetter(string))
+
+    return x
 
 def challengeY():
     string = input()
@@ -58,23 +75,23 @@ def challengeZ():
         if c in alphabet: lower_string += 1 
         elif c != ' ': upper_string += 1
 
-    return int((upper_string-lower_string)**(upper_word-lower_word))
+    return int((lower_string-upper_string)**(lower_word-upper_word))
 
 def main():
-    # x = challengeX()
-    # y = challengeY()
+    x = challengeX()
+    y = challengeY()
     z = challengeZ()
 
-    # i = int(input())
-    # j = int(input())
-    # k = int(input())
+    i = int(input())
+    j = int(input())
+    k = int(input())
 
-    # dist = ( (x - i)**2 + (y - j)**2 + (z - k)**2 )**(1/2)
+    dist = ( (x - i)**2 + (y - j)**2 + (z - k)**2 )**(1/2)
 
-    # print(f"A 1ª coordenada do Papai Noel é: {x}")
-    # print(f"A 2ª coordenada do Papai Noel é: {y}")
+    print(f"A 1ª coordenada do Papai Noel é: {x}")
+    print(f"A 2ª coordenada do Papai Noel é: {y}")
     print(f"A 3ª coordenada do Papai Noel é: {z}")
-    # print(f"A distância entre Jack Esqueleto e Papai Noel é: {dist}")
+    print(f"A distância entre Jack Esqueleto e Papai Noel é: {dist:.2f}")
 
     return 1
 
