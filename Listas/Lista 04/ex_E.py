@@ -58,7 +58,7 @@ def challengeZ():
         if c in alphabet: lower_string += 1 
         elif c != ' ': upper_string += 1
 
-    return (abs(upper_string-lower_string))**(abs(upper_word-lower_word))
+    return int((upper_string-lower_string)**(upper_word-lower_word))
 
 def main():
     # x = challengeX()
