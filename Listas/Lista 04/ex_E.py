@@ -10,6 +10,7 @@ def pangram(string):
 
     return True
 
+
 store_fib = [-1 for k in range(INF)]
 def fib(n): #DP for efficiency #MaratonaCIn
     if store_fib[n] != -1: return store_fib[n]
@@ -20,11 +21,13 @@ def fib(n): #DP for efficiency #MaratonaCIn
     store_fib[n] = fib(n-1) + fib(n-2)
     return store_fib[n]
 
+
 def hasVowel(string):
     for i in vowels:
         if i in string.lower():
             return True
     return False 
+
 
 def countLetter(string):
     lettermap = [0 for _ in range(26)]
@@ -33,12 +36,14 @@ def countLetter(string):
         lettermap[ord(c.lower())-ascci_A] += 1
     return lettermap
 
+
 def minmap(lettermap):
     lettermap.sort()
     a = 0
     while lettermap[a] == 0:
         a += 1
     return lettermap[a]
+
 
 def challengeX():
     string = input()
@@ -49,6 +54,7 @@ def challengeX():
         x = minmap(countLetter(string))
 
     return x
+
 
 def challengeY():
     string = input()
@@ -76,6 +82,7 @@ def challengeZ():
         elif c != ' ': upper_string += 1
 
     return int((lower_string-upper_string)**(lower_word-upper_word))
+
 
 def main():
     x = challengeX()
