@@ -1,4 +1,3 @@
-# 
 def suitcases(): #return list[ordered suitcases]
     weights = input().split(', ')
 
@@ -9,7 +8,7 @@ def suitcases(): #return list[ordered suitcases]
 
     return weights;
 
-#
+
 def parameters(): #return list[speed, load, people]
     read = input().split(', ')
     
@@ -23,7 +22,7 @@ def parameters(): #return list[speed, load, people]
 
     return [speed, load, people]
 
-#
+
 def shift(): # return string
     employees = input().split(", ")
     time = input().split(":")
@@ -44,7 +43,7 @@ def shift(): # return string
     
     return chosen_emplyees
 
-#
+
 def control(): #int main()
     print("A nova organização das malas é a seguinte: ", end='')
     ordered_suitcases = suitcases()
