@@ -1,6 +1,9 @@
+# GLOBAL VARIABLES:
 cities= [] #[ [dist, name, word, pos, dir, x, y] ]
 
-def cesar(word, positions, direction):
+# ---===---===---=*=---===---===--- #
+
+def cesar(word, positions, direction): #string
     dir = 1
     decodified = ''
     if direction == 'L': dir = -1
@@ -16,9 +19,9 @@ def cesar(word, positions, direction):
 
     return decodified
 
-def main():
-    cities_count = int(input())
 
+# Read each city, make some calculus and store it on a more convenient order (for sort)
+def read_cities(cities_count): #void
     for c in range(cities_count):
         city = input().split(', ')
         name  = city[0]
@@ -31,17 +34,30 @@ def main():
 
     cities.sort(reverse=True)
 
-    while(len(cities)!=0):
-        city = cities[-1]; cities.pop()
-        decodified = cesar (city[2], city[3], city[4])
 
-        print(f"A senha da cidade {city[1]} é: {decodified}")
-
-        for c in cities:
-            c[0] = (((c[5]-city[5])**2)+((c[6]-city[6])**2))**(1/2)
+# Quick flush of cities distance to match the distance for the actual city
+def flushDistancies(actual_city): #void
+    for c in cities:
+        c[0] = (((c[5]-actual_city[5])**2)+((c[6]-actual_city[6])**2))**(1/2)
         
-        cities.sort(reverse=True)
+    cities.sort(reverse=True)
 
+
+def main():
+    cities_count = int(input())
+
+    read_cities(cities_count)    
+
+    # For each city: decodify the password, then, flush the distances.
+    while(len(cities)!=0):
+        actual_city = cities[-1]; cities.pop()
+        decodified = cesar (actual_city[2], actual_city[3], actual_city[4])
+
+        print(f"A senha da cidade {actual_city[1]} é: {decodified}")
+
+        flushDistancies(actual_city)
+        
     return 1
+
 
 main()
