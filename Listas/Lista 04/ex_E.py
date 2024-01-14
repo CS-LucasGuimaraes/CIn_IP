@@ -1,9 +1,11 @@
+# GLOBAL VARIABLES:
 INF = 999
 alphabet = "abcdefghijklmnopqrstuvwxyz"
-vowels = 'aeiou'
-ascci_A = 97
+vowels = "aeiou"
 
-def pangram(string):
+# ---===---===---=*=---===---===--- #
+
+def pangram(string): #void
     for i in alphabet:
         if i not in string.lower():
             return False
@@ -11,8 +13,8 @@ def pangram(string):
     return True
 
 
-store_fib = [-1 for k in range(INF)]
-def fib(n): #DP for efficiency #MaratonaCIn
+store_fib = [-1 for k in range(INF)]            # DP for efficiency #MaratonaCIn
+def fib(n): #int
     if store_fib[n] != -1: return store_fib[n]
 
     if n == 0: return 0
@@ -22,25 +24,25 @@ def fib(n): #DP for efficiency #MaratonaCIn
     return store_fib[n]
 
 
-def hasVowel(string):
+def hasVowel(string): #bool
     for i in vowels:
         if i in string.lower():
             return True
     return False 
 
 
-def countLetter(string):
+def countLetter(string): #pseudo-map (for each index, the value is the count of the letter => a=0,z=25)
     lettermap = [0 for _ in range(26)]
     for c in string:
         if (c == ' '): continue
-        lettermap[ord(c.lower())-ascci_A] += 1
+        lettermap[ord(c.lower())-ord("a")] += 1
     return lettermap
 
-
+# Gets the min count of a letter that is not 0
 def minmap(lettermap):
     lettermap.sort()
-    a = 0
-    while lettermap[a] == 0:
+    a = 0                       # starts from the first element on the sorted list
+    while lettermap[a] == 0:    # goes until the element is != 0
         a += 1
     return lettermap[a]
 
@@ -101,5 +103,6 @@ def main():
     print(f"A distância entre Jack Esqueleto e Papai Noel é: {dist:.2f}")
 
     return 1
+
 
 main()
