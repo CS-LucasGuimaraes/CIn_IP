@@ -1,21 +1,17 @@
 # GLOBAL VARIABLES:
-cities= [] #[ [dist, name, word, pos, dir, x, y] ]
+cities = [] # [ [dist, name, word, pos, dir, x, y] ]
+Ascii_A = 65
 
 # ---===---===---=*=---===---===--- #
 
-def cesar(word, positions, direction): #string
-    dir = 1
+def caeser(word, positions, direction): #string
     decodified = ''
-    if direction == 'L': dir = -1
+    if direction == 'L': positions *= -1
     
     for c in word:
-        x = ord(c)
-        x += ((positions%26)*dir)
+        x = (ord(c)-Ascii_A + (positions%26)) % 26
 
-        if (x > 90): x -= 26
-        elif (x < 65): x += 26
-
-        decodified += chr(x)
+        decodified += chr(x+Ascii_A)
 
     return decodified
 
@@ -51,7 +47,7 @@ def main():
     # For each city: decodify the password, then, flush the distances.
     while(len(cities)!=0):
         actual_city = cities[-1]; cities.pop()
-        decodified = cesar (actual_city[2], actual_city[3], actual_city[4])
+        decodified = caeser(actual_city[2], actual_city[3], actual_city[4])
 
         print(f"A senha da cidade {actual_city[1]} é: {decodified}")
 
