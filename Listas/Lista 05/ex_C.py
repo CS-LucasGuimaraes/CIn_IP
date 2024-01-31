@@ -11,14 +11,11 @@ def check_len(firewall):
 
     if len(firewall) == 32:  # Already the correct length, return it as it is.
         return firewall
+    
+    # Add a leading zero to the string:
+    firewall = "0" + firewall
 
-    # Calculate the number of leading zeros needed:
-    leading_zeros = 32 - len(firewall)
-
-    # Create a new string with leading zeros and append the original firewall string:
-    new_firewall = "0" * leading_zeros + firewall
-
-    return new_firewall
+    return check_len(firewall) # Recursively checks if it is already at the required size (32 bits)
 
 
 def check_byte(firewall, tries):
