@@ -117,17 +117,58 @@ def check_inventory(name, category, x, y):
         print(f"Não precisamos de {name}")  # Item not required
         return 0
 
-    for i in range(r):
-        for j in range(c):
-            if board[i][j] == 'O':  # Found an empty space
-                if check_pos(i, j, x, y):  # Check if the item fits
-                    remaining_requiriments.remove(category)  # Item added, remove from remaining requirements
-                    print(f"Item adicionado: {name}")
-                    fill_pos(i, j, x, y, category)  # Fill the corresponding positions on the board
-                    return 1
+    # --> ITERATIVE APPROACH
+    # for i in range(r):
+    #     for j in range(c):
+    #         if board[i][j] == 'O':  # Found an empty space
+    #             if check_pos(i, j, x, y):  # Check if the item fits
+    #                 remaining_requiriments.remove(category)  # Item added, remove from remaining requirements
+    #                 print(f"Item adicionado: {name}")
+    #                 fill_pos(i, j, x, y, category)  # Fill the corresponding positions on the board
+    #                 return 1
+
+
+    # --> RECURSIVE APPROACH
+    if find_empty_space(x,y,0,0,category,name): return 1 
+
 
     print(f"Não há espaço para {name}")  # No space for the item
     return 0
+
+
+def find_empty_space(x,y,i,j,category,name):
+    """
+    Tries to find an empty space that fits the item somwhere in the inventory.
+
+    Args:
+      x (int): Width of the item
+      y (int): Height of the item
+      i (int): Actual width index
+      j (int): Actual height index
+      category (str): Category of the item
+      name (str): Name of the item
+
+    Returns:
+      bool: 1 if item fits somewhere, 0 otherwise
+    """
+    global r, c
+
+    if board[i][j] == 'O':  # Found an empty space
+        if check_pos(i, j, x, y):  # Check if the item fits
+            remaining_requiriments.remove(category)  # Item added, remove from remaining requirements
+            print(f"Item adicionado: {name}")
+            fill_pos(i, j, x, y, category)  # Fill the corresponding positions on the board
+            return 1
+        
+    # Recursive for system
+    j += 1
+    if j == c: 
+        j = 0
+        i += 1
+        if i == r:
+            return 0
+    
+    return find_empty_space(x,y,i,j,category,name)
 
 
 def check_pos(i, j, x, y):
