@@ -1,26 +1,3 @@
-def check_len(byte):
-    """
-    Ensures the binary string (byte) has a length of 8 characters by adding leading zeros if necessary.
-
-    Args:
-        byte (str): The binary string to check.
-
-    Returns:
-        str: The binary string with a length of 8, padded with leading zeros if needed.
-    """
-
-    if len(byte) == 8:  # Already the correct length, return it as is
-        return byte
-
-    # Calculate the number of leading zeros needed:
-    leading_zeros = 8 - len(byte)
-
-    # Create a new string with leading zeros and append the original binary string:
-    new_byte = "0" * leading_zeros + byte
-
-    return new_byte
-
-
 def binary2decimal(binary, i=0, decimal=0):
     """
     Converts a binary string to its decimal equivalent.
