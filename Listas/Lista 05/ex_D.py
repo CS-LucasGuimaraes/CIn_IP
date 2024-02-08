@@ -27,6 +27,8 @@ def binary2decimal(binary, i=0, decimal=0):
 
     Args:
         binary (str): The binary string to convert.
+        i (int): The current index.
+        decimal (int): The current converted binary.
 
     Returns:
         int: The decimal equivalent of the binary string.
@@ -38,21 +40,26 @@ def binary2decimal(binary, i=0, decimal=0):
     return decimal
 
 
-def browse_list(list, cont):
+def browse_list(list, cont=0, answ=''):
     """
-    Recursively prints the characters represented by the binary strings in the list.
+    Recursively gets the characters represented by the binary strings in the list.
 
     Args:
         list (list): A list of binary strings.
         cont (int): The current index within the list.
+        answ (string): The current answer string.
+    Return:
+        string: The string decoded from the binaries.
     """
 
     if cont < len(list):
         # Convert the binary string to decimal and print its corresponding character:
-        print(chr(binary2decimal(list[cont])), end='')
+        answ += chr(binary2decimal(list[cont]))
 
         # Recursively call the function for the next binary string:
-        browse_list(list, cont + 1)
+        return browse_list(list, cont + 1, answ)
+
+    return answ
 
 
 def main():
@@ -63,11 +70,7 @@ def main():
 
     binary_string = input().split(" ")  # Get a list of binary strings
 
-    print("Os códigos da Matrix indicam que ", end='') 
-
-    browse_list(binary_string, 0)  # Decode and print the characters
-
-    print(" está perto.") 
+    print(f"Os códigos da Matrix indicam que {browse_list(binary_string)} está perto.") 
 
     return 1
 
