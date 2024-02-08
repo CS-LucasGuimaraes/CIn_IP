@@ -21,7 +21,7 @@ def check_len(byte):
     return new_byte
 
 
-def binary2decimal(binary):
+def binary2decimal(binary, i=0, decimal=0):
     """
     Converts a binary string to its decimal equivalent.
 
@@ -31,21 +31,10 @@ def binary2decimal(binary):
     Returns:
         int: The decimal equivalent of the binary string.
     """
-
-    decimal = 0
-
-    binary = check_len(binary)  # Ensure binary string has a length of 8
-
-    # Convert each binary digit to its decimal value and add them up:
-    decimal += int(binary[0]) * 2**7
-    decimal += int(binary[1]) * 2**6
-    decimal += int(binary[2]) * 2**5
-    decimal += int(binary[3]) * 2**4
-    decimal += int(binary[4]) * 2**3
-    decimal += int(binary[5]) * 2**2
-    decimal += int(binary[6]) * 2**1
-    decimal += int(binary[7]) * 2**0
-
+    if i < len(binary):
+        decimal += int(binary[-i-1]) *2**i
+        return binary2decimal(binary, i+1, decimal)
+    
     return decimal
 
 
