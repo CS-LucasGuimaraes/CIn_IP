@@ -1,49 +1,33 @@
-"""
-==============================
-GLOBAL VARIABLES AND CONSTANTS
-==============================
-"""
-
-# Stores categories of equipment already present on the board:
-already_have_categories = []
-# Stores the remaining required equipment categories:
-remaining_requiriments = []
-
-# Represents the board as a 2D list:
-board = []
-
-# Dimensions of the board (initialized later):
-# r ==> rows || c ==> columns
-r = c = 0
-
-
-def read_board():
+def read_board(already_have_categories):
     """
     Reads the board representation from user input until "finalizar" is entered.
+    
+    Args:
+      already_have_categories (list(string)): The categories that are already in the board.
+    
     """
 
-    global r, c, board
+    # Represents the board as a 2D list:
+    board = []
 
     row = input()  # Read the first row
     while row != "finalizar":  # Continue reading rows until "finalizar" is entered
         row = [c for c in row]  # Convert the row (string) to a list(char)
         board.append(row)  # Add the row (list) to the board
-        pre_check_board(row)  # Check for existing equipment in the row
+        pre_check_board(row, already_have_categories)  # Check for existing equipment in the row
         row = input()  # Read the next row
 
-    r = len(board)  # Set the number of rows to the length of the board list
-    c = len(board[0])  # Set the number of columns to the length of the first row
+    return board
 
 
-def pre_check_board(row):
+def pre_check_board(row, already_have_categories):
     """
     Checks if any equipment categories are already present in the given row.
     
     Args:
-      row (list(int)): the row that are going to be verified    
+      row (list(int)): the row that are going to be verified
+      already_have_categories (list(string)): The categories that are already in the board.    
     """
-
-    global already_have_categories
 
     if 'M' in row and "municão" not in already_have_categories: 
         already_have_categories.append("munição")
@@ -63,12 +47,15 @@ def pre_check_board(row):
     if 'A' in row and "acessorios" not in already_have_categories:
         already_have_categories.append("acessorios")
 
-def print_board():
+def print_board(board, r, c):
     """
     Prints the current state of the board.
-    """
 
-    global r, c, board
+    Args:
+      board (list2D): matrix of the board.
+      r: number of rows of the board.
+      c: number of cols of the board.
+    """
 
     for i in range(r):  # Iterate through each row
         for j in range(c):  # Iterate through each element in the row
@@ -76,9 +63,13 @@ def print_board():
         print()  # Print a newline after each row
 
 
-def read_itens():
+def read_itens(board, r, c, remaining_requiriments):
     """
     Reads items from user input until "finalizar programa" is entered.
+
+    Args:
+      board (list2D): matrix of the board.
+      remaining_requiriments (list(string)): The categories that aren't already in the board. 
     """
 
     item = input()  # Read the first item
@@ -92,12 +83,12 @@ def read_itens():
         y = int(size[0])  # Item height
         category = item[2]
 
-        check_inventory(name, category, x, y)  # Check if the item can be placed on the board
+        check_inventory(name, category, x, y, r, c, board, remaining_requiriments)  # Check if the item can be placed on the board
 
         item = input()  # Read the next item
 
 
-def check_inventory(name, category, x, y):
+def check_inventory(name, category, x, y, r, c, board, remaining_requiriments):
     """
     Checks if an item can be placed on the board and updates inventory accordingly.
 
@@ -106,37 +97,24 @@ def check_inventory(name, category, x, y):
       category (str): Category of the item
       x (int): Width of the item
       y (int): Height of the item
+      board (list2D): matrix of the board.
+      remaining_requiriments (list(string)): The categories that aren't already in the board. 
 
     Returns:
       bool: 1 if item added, 0 otherwise
     """
 
-    global board, remaining_requiriments
-
     if category not in remaining_requiriments:
         print(f"Não precisamos de {name}")  # Item not required
         return 0
 
-    # --> ITERATIVE APPROACH
-    # for i in range(r):
-    #     for j in range(c):
-    #         if board[i][j] == 'O':  # Found an empty space
-    #             if check_pos(i, j, x, y):  # Check if the item fits
-    #                 remaining_requiriments.remove(category)  # Item added, remove from remaining requirements
-    #                 print(f"Item adicionado: {name}")
-    #                 fill_pos(i, j, x, y, category)  # Fill the corresponding positions on the board
-    #                 return 1
-
-
-    # --> RECURSIVE APPROACH
-    if find_empty_space(x,y,0,0,category,name): return 1 
-
+    if find_empty_space(x,y,0,0,category,name, r, c, board, remaining_requiriments): return 1 
 
     print(f"Não há espaço para {name}")  # No space for the item
     return 0
 
 
-def find_empty_space(x,y,i,j,category,name):
+def find_empty_space(x,y,i,j,category,name, r, c, board, remaining_requiriments):
     """
     Tries to find an empty space that fits the item somwhere in the inventory.
 
@@ -147,17 +125,18 @@ def find_empty_space(x,y,i,j,category,name):
       j (int): Actual height index
       category (str): Category of the item
       name (str): Name of the item
+      board (list2D): matrix of the board. 
+      remaining_requiriments (list(string)): The categories that aren't already in the board.
 
     Returns:
       bool: 1 if item fits somewhere, 0 otherwise
     """
-    global r, c
 
     if board[i][j] == 'O':  # Found an empty space
-        if check_pos(i, j, x, y):  # Check if the item fits
+        if check_pos(i, j, x, y, r, c, board):  # Check if the item fits
             remaining_requiriments.remove(category)  # Item added, remove from remaining requirements
             print(f"Item adicionado: {name}")
-            fill_pos(i, j, x, y, category)  # Fill the corresponding positions on the board
+            board = fill_pos(i, j, x, y, category, board)  # Fill the corresponding positions on the board
             return 1
         
     # Recursive for system
@@ -168,10 +147,10 @@ def find_empty_space(x,y,i,j,category,name):
         if i == r:
             return 0
     
-    return find_empty_space(x,y,i,j,category,name)
+    return find_empty_space(x,y,i,j,category,name,r,c,board, remaining_requiriments)
 
 
-def check_pos(i, j, x, y):
+def check_pos(i, j, x, y, r, c, board):
     """
     Checks if an item of size x*y can fit on the board starting at position (i, j).
 
@@ -180,12 +159,11 @@ def check_pos(i, j, x, y):
       j (int): Starting column index
       x (int): Width of the item
       y (int): Height of the item
+      board (list2D): matrix of the board. 
 
     Returns:
       bool: 1 if item fits, 0 otherwise
     """
-
-    global r, c
 
     if (i + x > r or j + y > c): return 0  # Check if item extends beyond board boundaries
 
@@ -197,7 +175,7 @@ def check_pos(i, j, x, y):
     return 1  # Item fits
 
 
-def fill_pos(i, j, x, y, category):
+def fill_pos(i, j, x, y, category, board):
     """
     Fills the positions on the board with a character representing the item's category.
 
@@ -207,6 +185,7 @@ def fill_pos(i, j, x, y, category):
       x (int): Width of the item
       y (int): Height of the item
       category (str): Category of the item
+      board (list2D): matrix of the board. 
     """
 
     category = category.split(' ')  # Split category into words
@@ -216,13 +195,14 @@ def fill_pos(i, j, x, y, category):
         for l in range(y):
             board[i + k][j + l] = char
 
-
-def remove_already_have_equipments():
+def remove_already_have_equipments(remaining_requiriments, already_have_categories):
     """
     Removes any equipment categories that are already present on the board from the remaining requirements.
-    """
 
-    global already_have_categories, remaining_requiriments
+    Args:
+    already_have_categories (list(string)): The categories that are already in the board.
+    remaining_requiriments (list(string)): The categories that aren't already in the board.
+    """
 
     for c in already_have_categories:
         if c in remaining_requiriments:
@@ -237,18 +217,25 @@ def main():
     state of the board. If any requirement was missing, print them. 
     """
 
-    global remaining_requiriments
+    # Stores categories of equipment already present on the board:
+    already_have_categories = []
 
-    read_board()  # Read the board representation
+    board = read_board(already_have_categories)  # Read the board representation
 
-    required_equipments = input().split(", ")  # Read the list of required equipment categories
-    remaining_requiriments = required_equipments.copy()  # Set remaining requirements as a copy of the read list
 
-    remove_already_have_equipments()  # Remove categories already present on the board
+    # Dimensions of the board:
+    r = len(board)  # Set the number of rows to the length of the board list
+    c = len(board[0])  # Set the number of columns to the length of the first row
 
-    read_itens()  # Read and process item inputs
+    # Stores the remaining required equipment categories:
+    remaining_requiriments = input().split(", ")  # Read the list of required equipment categories
+    
 
-    print_board()  # Print the final state of the board
+    remove_already_have_equipments(remaining_requiriments, already_have_categories)  # Remove categories already present on the board
+
+    read_itens(board, r, c, remaining_requiriments)  # Read and process item inputs
+
+    print_board(board, r, c)  # Print the final state of the board
 
     if len(remaining_requiriments) != 0:  # Check if any items were missing
         print(f"Faltou: {', '.join(remaining_requiriments)}")
