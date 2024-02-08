@@ -1,13 +1,3 @@
-"""
-==============================
-GLOBAL VARIABLES AND CONSTANTS
-==============================
-"""
-
-# Constant that simulates x -> 0 (infinite low values).
-h = float(1e-9)
-
-
 def find_root(x1,y1, a,b,c,d,e):
     """
     Finds the root of the function f(x) using the Newton-Raphson method.
@@ -21,7 +11,9 @@ def find_root(x1,y1, a,b,c,d,e):
       bool: True if the root was found, False otherwise.
     """
 
-    global h
+    # Constant that simulates x -> 0 (infinite low values).
+    h = float(1e-9)
+
 
     # Compute the derivative of f(x) at x1
     derivate =  ( ((a*((x1+h)+b)**c)+(e*(x1+h))+d) - ((a*(x1+b)**c)+(e*x1)+d) ) / h
